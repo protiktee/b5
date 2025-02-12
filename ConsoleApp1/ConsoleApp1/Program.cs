@@ -75,25 +75,76 @@ using System;
 //    Console.WriteLine(item);
 //}
 
-List<Human> strings = new List<Human>();
-Human human = new Human();
-human.Name = "Rahim";
-strings.Add(human);
+//List<Human> strings = new List<Human>();
+//Human human = new Human();
+//human.Name = "Rahim";
+//strings.Add(human);
 
-human = new Human();
-human.Name = "Karim";
-strings.Add(human);
+//human = new Human();
+//human.Name = "Karim";
+//strings.Add(human);
+
+//human = new Human();
+//human.Name = "ABC";
+//strings.Add(human);
+//foreach (Human item in strings)
+//{
+//    Console.WriteLine("Person name is:"+item.Name);
+//    Console.WriteLine("-----------------------");
+//}
+
+// //  *
+// // ***
+// //*****
+
+//Console.ReadLine();
+
+//Human objHuman = new Human();
+//objHuman.Name = "Protik";
+
+//Console.WriteLine(objHuman.Name+" last Degree:"+objHuman.GetEducation());
+//Console.ReadLine();
+
+//Animal objAnimal = new Animal();
+//string animalSound = objAnimal.GetSoundName(Console.ReadLine());
+//Console.WriteLine(animalSound);
+//Console.ReadLine();
+
+//Human objHuman = new Human();
+//Console.WriteLine("With No argument:"+objHuman.GetEducation("","")); 
+//Console.WriteLine("With argument:" + objHuman.GetEducation("UnderGrad"));
+//Console.ReadLine();
+
+//Human objHuman = new Human();
+//objHuman.Name = "protik";
+//Console.WriteLine(objHuman.Name+" Hobby is:"+objHuman.getHobby()); 
+//Console.ReadLine();
+
+//Constructor
+//Human objHuman = new Human("Called from UI"); 
+//Console.WriteLine(objHuman.Name);
+//Console.ReadLine();
 
 
-foreach (Human item in strings)
-{
-    Console.WriteLine("Person name is:"+item.Name);
-    Console.WriteLine("-----------------------");
-}
+//Human objHuman = new Human();
+//Console.WriteLine(objHuman.Name);
+//objHuman.getHobby();
+//Console.WriteLine(objHuman.Name);
+//Console.ReadLine();
 
- //  *
- // ***
- //*****
+//static function
 
+Console.WriteLine(Human.GetAge());
 Console.ReadLine();
+
+//partial class
+//Passport passport = new Passport();
+//Console.ReadLine();
+
+//Abstraction
+Human human = new Human();
+Console.WriteLine(human.StationaryCount());
+Console.ReadLine();
+;
+
 
