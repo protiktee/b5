@@ -1,0 +1,6 @@
+@QAndA_b5_HostAddress = http://localhost:5079
+
+GET {{QAndA_b5_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

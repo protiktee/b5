@@ -1,0 +1,136 @@
+﻿@using Inventory_b5.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #tblEqipment {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #tblEqipment td, #tblEqipment th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #tblEqipment tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tblEqipment tr:hover {
+            background-color: #ddd;
+        }
+
+        #tblEqipment th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+</style>
+<script>
+    //legacy part
+    //function ShowModal() {
+    //    document.getElementById('dvOverlay').style.display = '';
+    //    document.getElementById('dvModal').style.display = '';
+
+    //}
+    //function HideModal() {
+    //    document.getElementById('dvOverlay').style.display = 'none';
+    //    document.getElementById('dvModal').style.display = 'none';
+    //}
+    function UpdateItem(equipmentid) {
+        ShowModal();
+        $('#hdEquipmentID').val(equipmentid);
+        $('#btnSubmit').val('Update'); 
+    }
+    //dynamic part
+    function ShowModal() { 
+
+        $('#dvModal').dialog({
+            title:"Equipment Entry",
+            height: 600,
+            width: 400,
+            modal: true 
+            //,
+            //buttons: {
+            //    Cancel: function () {
+            //        dialog.dialog("close");
+            //    },
+            //    Ok: function () {
+            //        dialog.dialog("close");
+            //    }
+            //}
+        });
+
+    }
+    function HideModal() { 
+    }
+
+    var OutMessage = "@ViewBag.OutMessage";
+    if (OutMessage != "") {
+        alert(OutMessage);
+        OutMessage = "";
+    }
+</script>
+<div class="row">
+    <div class="col col-sm-6">
+        <div style="width:100%">
+            <div style="height: 30px; background: cornsilk; width: 100%; text-align: center; padding: 5px; border-radius: 5px; ">
+                Equipment List 
+                <input type="button"  value="new" style="float:right" onclick="ShowModal();$('#btnSubmit').val('Save'); "/>
+            </div>
+            <div style="max-height: 400px;width: 100%; overflow:auto">
+               @{ 
+
+                   List<BaseEquipment> lstEquipment = (List<BaseEquipment>)ViewBag.lstEquipment;
+
+
+                   //EquipmentId	EquipmentName	Quantity	Stock	EntryDate	ReceiveDate
+               }
+                <table id="tblEqipment" style="width:100%">
+                    <tr>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>EquipmentName</th>
+                        <th>Quantity</th>
+                        <th>Stock</th>
+                        <th>EntryDate</th>
+                        <th>ReceiveDate</th>
+                    </tr>
+                    @{ 
+                        foreach (BaseEquipment obj in lstEquipment)
+                        {
+                                        <tr>
+                                            <td><input type="button" value="Update" onclick="UpdateItem(@obj.EquipmentId)" /></td>
+                                            <td><input type="button" value="Delete" onclick="DeleteItem(@obj.EquipmentId)" /></td>
+                                            <td>@obj.EquipmentName</td>
+                                            <td>@obj.Quantity</td>
+                                            <td>@obj.Stock</td>
+                                            <td>@obj.EntryDate</td>
+                                            <td>@obj.ReceiveDate</td>
+                                        </tr>
+                        }
+
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col col-sm-6">
+        <div style="width:100%">
+            <div style="height: 30px; background: cornsilk; width: 100%; text-align: center; padding: 5px; border-radius: 5px; ">
+                Caption 2
+            </div>
+            <div style="max-height: 400px;width: 100%; overflow:auto">
+                list 2
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_PartialEquipmentEntry");
+

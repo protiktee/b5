@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <style>
+    </style>
+    @{ 
+        string SessionUser = "";
+        if(Session["UserName"]!=null)
+        {
+            SessionUser = Session["UserName"].ToString();
+        }
+    }
+    <script>
+        var username = '@SessionUser';
+        if (username != '') {
+            //alert("Login Success. User:" + username)
+            window.location.href = "@Url.Action("Index", "DashBoard")";
+        }
+        else {
+            //alert("Login failed. User:" + username)
+        }
+    </script>
+</head>
+<body>
+
+    <div id="dvLoginWrapper" class="clsLoginWrapper" style="">
+        <div style="position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; margin: auto; height: 300px; width: 90%; ">
+            <form method="post" action="@Url.Action("Login","Auth")">
+                <div class="card">
+                    <div class="card-header" style="text-align:center">
+                        Login
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">UserName</label>
+                            <input type="text" name="txtUserName" class="form-control" id="exampleFormControlInput1" placeholder="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Password</label>
+                            <input type="password" name="txtPassword" class="form-control" id="exampleFormControlInput1" placeholder="password">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit"/>
+                    </div>
+                </div>
+            </form>  
+        </div> 
+    </div> 
+</body>
+</html>

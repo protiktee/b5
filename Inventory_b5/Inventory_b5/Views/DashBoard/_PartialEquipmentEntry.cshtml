@@ -1,0 +1,33 @@
+﻿@*Legacy Modal*@
+@*<div id="dvOverlay" style="display:none;position: fixed; left: 0px; right: 0px; top: 0px; bottom: 0px; background-color: #000; opacity: .5;z-index:5">
+
+</div>
+<div id="dvModal" style="display: none;position: fixed; width: 400px; height: 600px; margin: auto; left: 0px; right: 0px; top: 0px; bottom: 0px; background: #ffff; z-index: 6 ">
+    <input type="button" value="Close" onclick="HideModal()"/>
+</div>*@
+
+@*dynamic modal*@
+<div id="dvModal" style="display: none;"> 
+    <form action="@Url.Action("Index","Dashboard")" method="post">
+        <input type="hidden" name="EquipmentID" id="hdEquipmentID" value="0"/>
+        <div class="row">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" name="txtEquipName" class="form-control" id="exampleFormControlInput1" placeholder="Name">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput2" class="form-label">Quantity</label>
+                <input type="text" name="txtQuantity" class="form-control" id="exampleFormControlInput2" placeholder="Quantity">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput3" class="form-label">Entry Date</label>
+                <input type="Date" name="txtEntryDate" class="form-control" id="exampleFormControlInput3" placeholder="Entry Date">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlInput4" class="form-label">Receive Date</label>
+                <input type="Date" name="txtRcvDate" class="form-control" id="exampleFormControlInput4" placeholder="Receive Date">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Save" name="btnSubmit" id="btnSubmit"/>
+        </div>
+    </form>
+</div>
