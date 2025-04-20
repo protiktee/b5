@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Inventory_b5.Models
 {
@@ -71,6 +72,47 @@ namespace Inventory_b5.Models
             cmd.Dispose();
             sqlConnection.Close();
             return returnvalue ;
+        }
+        public DataTable ListAssignedEquipment()
+        {
+            DataTable dataTable = new DataTable();
+
+            string Connstring = ConfigurationManager.ConnectionStrings["Connstring"].ToString();
+            SqlConnection sqlConnection = new SqlConnection(Connstring);
+            sqlConnection.Open();
+
+            string CommandText = "spOst_LstCustomerEquiAssignment";
+            SqlCommand cmd = new SqlCommand(CommandText, sqlConnection);
+            cmd.CommandTimeout = 0;
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Clear();
+            // cmd.ExecuteNonQuery();
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+            dataAdapter.Fill(dataTable);
+            cmd.Dispose();
+            sqlConnection.Close();
+            return dataTable;
+        }
+
+        public static int SaveEquipmentAssignment(FormCollection frmCol)
+        {
+            string Connstring = ConfigurationManager.ConnectionStrings["Connstring"].ToString();
+            SqlConnection sqlConnection = new SqlConnection(Connstring);
+            sqlConnection.Open();
+
+            string CommandText = "spOST_InsEquiAssignment";
+            SqlCommand cmd = new SqlCommand(CommandText, sqlConnection);
+            cmd.CommandTimeout = 0;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Clear();
+            cmd.Parameters.Add(new SqlParameter("@CustomerID", Convert.ToInt32(frmCol["txtCustomerID"].ToString())));
+            cmd.Parameters.Add(new SqlParameter("@EquipmentID", Convert.ToInt32(frmCol["txtEquipmentID"].ToString())));
+            cmd.Parameters.Add(new SqlParameter("@EquiCount", Convert.ToInt32(frmCol["txtQuantity"].ToString()))); 
+            //cmd.Parameters.Add()
+            int returnvalue = cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            sqlConnection.Close();
+            return returnvalue;
         }
     }
 }

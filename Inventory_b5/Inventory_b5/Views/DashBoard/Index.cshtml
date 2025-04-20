@@ -1,29 +1,30 @@
 ﻿@using Inventory_b5.Models
+@using System.Data
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-    #tblEqipment {
+    #tblEqipment, #tblEqipmentAssignment {
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         width: 100%;
     }
 
-        #tblEqipment td, #tblEqipment th {
+        #tblEqipment td, #tblEqipment th, #tblEqipmentAssignment td, #tblEqipmentAssignment th {
             border: 1px solid #ddd;
             padding: 8px;
         }
 
-        #tblEqipment tr:nth-child(even) {
+        #tblEqipment tr:nth-child(even), #tblEqipmentAssignment tr:nth-child(even) {
             background-color: #f2f2f2;
         }
 
-        #tblEqipment tr:hover {
+        #tblEqipment tr:hover, #tblEqipmentAssignment tr:hover {
             background-color: #ddd;
         }
 
-        #tblEqipment th {
+        #tblEqipment th, #tblEqipmentAssignment th {
             padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
@@ -123,10 +124,72 @@
     <div class="col col-sm-6">
         <div style="width:100%">
             <div style="height: 30px; background: cornsilk; width: 100%; text-align: center; padding: 5px; border-radius: 5px; ">
-                Caption 2
+                Assignment History
+                <input type="button" value="new" style="float:right" onclick="window.location.href='@Url.Action("NewEquipmentAssignment","Dashboard")'" />
             </div>
             <div style="max-height: 400px;width: 100%; overflow:auto">
-                list 2
+                @{
+                    BaseEquipment baseEquipment = new BaseEquipment();
+                    System.Data.DataTable dt = baseEquipment.ListAssignedEquipment();
+
+
+                    //for(int x=0;x< dt.Rows.Count-1;x++)
+                    //{
+                    //    for (int y = 0; y < 6; y++)
+                    //    {
+                    //        string ddds = dt.Rows[x][y].ToString();
+                    //    }
+                    //}
+
+
+                    var dataList = (from p in dt.AsEnumerable()
+                                    select new
+                                    {
+                                        CustomerID = p.Field<Int32>("CustomerID"),
+                                        CustomerName = p.Field<string>("CustomerName"),
+                                        CustomerMobile = p.Field<string>("CustomerMobile"),
+                                        CustAddress = p.Field<string>("CustAddress"),
+                                        EquiCount = p.Field<Int32>("EquiCount"),
+                                        EquipmentName = p.Field<string>("EquipmentName"),
+                                        Assignment = p.Field<Int32>("Assignment")
+
+                                    }).ToList();
+
+                }
+                <table id="tblEqipmentAssignment" style="width:100%">
+                    <tr>
+                        <th>Update</th>
+                        <th>Delete</th>
+                        <th>CustomerName</th>
+                        <th>CustomerMobile</th>
+                        <th>EquipmentName</th>
+                        <th>EquiCount</th>
+                    </tr>
+                    @{
+                        foreach (var objData in dataList)
+                        {
+                            string DisableStr = "";
+                            if(objData.Assignment==0)
+                            {
+                                DisableStr = "disabled=disabled";
+                            }
+
+                            <tr> 
+                                <td>
+                                    <input type="button" value="Update" onclick="AssignmentUpdate(@objData.Assignment)" @DisableStr/> 
+                                </td>
+                                <td>
+                                    <input type="button" value="Delete" onclick="AssignmentDelete(@objData.Assignment)" @DisableStr/>
+                                </td>
+                                <td>@objData.CustomerName</td>
+                                <td>@objData.CustomerMobile</td>
+                                <td>@objData.EquipmentName</td>
+                                <td>@objData.EquiCount</td>
+                            </tr>
+                        }
+
+                    }
+                </table>
             </div>
         </div>
     </div>

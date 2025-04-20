@@ -1,0 +1,49 @@
+﻿@using Inventory_b5.Models
+@{
+    ViewBag.Title = "NewEquipmentAssignment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+     var OutMessage = "@ViewBag.OutMessage";
+ if (OutMessage != "") {
+     alert(OutMessage);
+     OutMessage = "";
+ }
+</script>
+<h2>NewEquipmentAssignment</h2>
+@{
+
+    List<BaseEquipment> lstEquipment = (List<BaseEquipment>)ViewBag.lstEquipment;
+
+
+    //EquipmentId	EquipmentName	Quantity	Stock	EntryDate	ReceiveDate
+}
+<form action="@Url.Action("NewEquipmentAssignment", "Dashboard")" method="post">
+    <input type="hidden" name="EquipmentID" id="hdEquipmentID" value="0" />
+    <div class="row">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">CustomerID</label>
+            <input type="text" name="txtCustomerID" class="form-control" id="exampleFormControlInput1" placeholder="Customer">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">EquipmentID</label>
+            @*<input type="text" name="txtEquipmentID" class="form-control" id="exampleFormControlInput2" placeholder="Equipment">*@
+            
+        <select name="txtEquipmentID" class="form-control" id="exampleFormControlInput2" onchange="alert($(this).val())">
+            @{
+                foreach (BaseEquipment obj in lstEquipment)
+                {
+                    <option value="@obj.EquipmentId">@obj.EquipmentName</option> 
+                } 
+            } 
+        </select>
+
+
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">Quantity</label>
+            <input type="text" name="txtQuantity" class="form-control" id="exampleFormControlInput2" placeholder="Quantity">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Save" name="btnSubmit" id="btnSubmit" />
+    </div>
+</form>

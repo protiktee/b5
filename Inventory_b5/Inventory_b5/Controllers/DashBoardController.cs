@@ -9,7 +9,7 @@ namespace Inventory_b5.Controllers
 {
     public class DashBoardController : Controller
     {
-        // GET: DashBoard
+        // GET: DashBoard NewEquipmentAssignment
         public ActionResult Index()
         { 
             BaseEquipment baseEquipment = new BaseEquipment();
@@ -73,5 +73,33 @@ namespace Inventory_b5.Controllers
         }
         //public ActionResult Save() { 
         //private void Load
+        public ActionResult NewEquipmentAssignment()
+        {
+            BaseEquipment baseEquipment = new BaseEquipment();
+            List<BaseEquipment> lstEquipment = baseEquipment.ListEquipment();
+
+            //List<BaseEquipment> lstEquipment_laptop = new List<BaseEquipment>();
+            //foreach (BaseEquipment obj in lstEquipment)
+            //{
+            //    if (obj.EquipmentName.Contains("Laptop"))
+            //    {
+            //        lstEquipment_laptop.Add(obj);
+            //    }
+            //}
+            ViewBag.lstEquipment = lstEquipment;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult NewEquipmentAssignment(FormCollection frmCol)
+        { 
+            int returnval= BaseEquipment.SaveEquipmentAssignment(frmCol);
+            if (returnval > 0)
+            {
+                ViewBag.OutMessage = "Operation Completed Successfully";
+                return Redirect(Url.Action("Index","Dashboard"));
+            }
+            ViewBag.OutMessage = "Operation failed";
+            return View();
+        }
     }
 }

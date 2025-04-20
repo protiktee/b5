@@ -198,6 +198,7 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\DashBoard\_PartialEquipmentEntry.cshtml" />
+    <Content Include="Views\DashBoard\NewEquipmentAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
