@@ -78,14 +78,8 @@ namespace Inventory_b5.Controllers
             BaseEquipment baseEquipment = new BaseEquipment();
             List<BaseEquipment> lstEquipment = baseEquipment.ListEquipment();
 
-            //List<BaseEquipment> lstEquipment_laptop = new List<BaseEquipment>();
-            //foreach (BaseEquipment obj in lstEquipment)
-            //{
-            //    if (obj.EquipmentName.Contains("Laptop"))
-            //    {
-            //        lstEquipment_laptop.Add(obj);
-            //    }
-            //}
+            int AssignmentId = Convert.ToInt32(Request.QueryString["id"].ToString());
+            
             ViewBag.lstEquipment = lstEquipment;
             return View();
         }
@@ -100,6 +94,17 @@ namespace Inventory_b5.Controllers
             }
             ViewBag.OutMessage = "Operation failed";
             return View();
+        }
+        public ActionResult ModelTest()
+        { 
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ModelTest(BaseEquipment model)
+        {
+            BaseEquipment sdsmodel = new BaseEquipment();
+            ModelState.Clear();
+            return View(sdsmodel);
         }
     }
 }

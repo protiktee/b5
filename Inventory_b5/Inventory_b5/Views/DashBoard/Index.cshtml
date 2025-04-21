@@ -176,7 +176,7 @@
 
                             <tr> 
                                 <td>
-                                    <input type="button" value="Update" onclick="AssignmentUpdate(@objData.Assignment)" @DisableStr/> 
+                                    <input type="button" value="Update" onclick="window.location.href='@Url.Action("NewEquipmentAssignment","Dashboard")?id=@objData.Assignment'" @DisableStr/> 
                                 </td>
                                 <td>
                                     <input type="button" value="Delete" onclick="AssignmentDelete(@objData.Assignment)" @DisableStr/>

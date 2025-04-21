@@ -1,0 +1,14 @@
+﻿@model Inventory_b5.Models.BaseEquipment
+@{
+    ViewBag.Title = "ModelTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ModelTest</h2>
+<form method="post">
+    @Html.TextBoxFor(m => m.EquipmentName)
+    @Html.TextBoxFor(m => m.EntryDate)
+    <input type="submit" value="Save" />
+
+</form>
+

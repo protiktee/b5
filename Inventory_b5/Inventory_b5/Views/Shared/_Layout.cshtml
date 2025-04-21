@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     @{
         string SessionUser = "";
         if (Session["UserName"] != null)
@@ -15,9 +16,9 @@
     }
     <script>
      var username = '@SessionUser';
-     if (username == '') { 
+     if (username == '') {
          window.location.href = "@Url.Action("Login","Auth")";
-     } 
+     }
     </script>
 </head>
 <body>
@@ -26,7 +27,7 @@
             @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
@@ -49,7 +50,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    
     <script src="~/Scripts/JqUI/jquery-ui.js"></script>
     <link href="~/Scripts/JqUI/jquery-ui.css" rel="stylesheet" />
 

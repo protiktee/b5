@@ -199,6 +199,7 @@
     <Content Include="Views\DashBoard\Index.cshtml" />
     <Content Include="Views\DashBoard\_PartialEquipmentEntry.cshtml" />
     <Content Include="Views\DashBoard\NewEquipmentAssignment.cshtml" />
+    <Content Include="Views\DashBoard\ModelTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
