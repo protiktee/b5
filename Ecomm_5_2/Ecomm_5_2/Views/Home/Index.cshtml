@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+} 
+ 
+
+@* val() *@ @* html() *@ @* text() *@
+  
+<script> 
+    function SaveProduct() { 
+        var listtags = [];
+        listtags.push('beauty');
+        listtags.push('mascara');
+
+        var listReviews = [];
+        var Review = {
+            rating: 3,
+            comment: "Would not recommend!",
+             
+            reviewerName: "Eleanor Collins",
+            reviewerEmail: "eleanor.collins@x.dummyjson.com"
+        }
+        listReviews.push(Review); 
+
+        var Product = {
+            id: 1,
+            title: "Essence Mascara Lash Princess",
+            price: 9.99,
+            tags: listtags,
+            dimensions: {
+                width: 15.14,
+                height: 13.08,
+                depth: 22.99
+            },
+
+            reviews: listReviews
+        }
+
+        // $.post("http://localhost:56910/Home/SaveProduct", Product, function() {
+        //     alert('Save successfully')
+        // });
+         
+        $.ajax({
+            url: 'http://localhost:56910/Home/SaveProduct', // Replace with your actual endpoint
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                id: 1,
+                title: "Essence Mascara Lash Princess",
+                price: 9.99,
+                tags: listtags,
+                dimensions: {
+                    width: 15.14,
+                    height: 13.08,
+                    depth: 22.99
+                },
+                reviews: listReviews
+            }),
+            success: function(response) {
+                console.log('Success:', response);
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', error);
+            }
+        });
+
+    }
+</script> 
+
+<input type="button" onclick="SaveProduct()"/>
+
+
