@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using QAndA_b5.Model;
 using System.ComponentModel.DataAnnotations;
@@ -26,19 +27,32 @@ namespace QAndA_b5.Controllers
 
             return Ok(lData);
         }
-        [HttpGet("QuestionsList")] 
+        [HttpGet("QuestionsList")]
+        [EnableCors("Policy_1")]
         public IActionResult QuestionsList()
         {
-            var data = new { 
-                Name="Protik",
-                Education=""
+            string output = "";
+            try
+            {
+                int value = Convert.ToInt32("asdasdsa");
+
+            }
+            catch (Exception ex)
+            {
+                output = "Error Occured:" + ex.Message;
+            } 
+            var data = new
+            {
+                Name = "Protik",
+                Education = ""
             };
             List<string> strings = new List<string>();
             strings.Add("A");
             strings.Add("B");
-            return Ok(strings);
+            return Ok(output);
         }
-        [HttpGet("GetName")] 
+        [HttpGet("GetName")]
+        [EnableCors("Policy_2")]
         public IActionResult GetName()
         {
             var data = new
